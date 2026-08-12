@@ -45,7 +45,11 @@ export default function Cadastro() {
     async function verificarSlug(valor) {
         if (!valor || valor.length < 3) { setSlugDisponivel(null); return }
         setVerificandoSlug(true)
-        const { data } = await supabase.from('barbershops').select('id').eq('slug', valor).single()
+        const { data } = await supabase
+            .from('barbershops')
+            .select('id')
+            .eq('slug', valor)
+            .maybeSingle()
         setSlugDisponivel(!data)
         setVerificandoSlug(false)
     }
