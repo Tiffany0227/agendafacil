@@ -106,7 +106,7 @@ export default function Cadastro() {
                 }
             })
             .select()
-            .single()
+            .maybeSingle()
 
         if (shopError) {
             setErros({ geral: 'Erro ao criar salão. Tente novamente.' })
