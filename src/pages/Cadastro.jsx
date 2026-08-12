@@ -110,13 +110,21 @@ export default function Cadastro() {
       return
     }
 
+    // Aguarda o perfil ser criado pelo trigger
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
     // Atualiza o perfil do dono
-    await supabase.from('profiles').update({
-      barbershop_id: barbershop.id,
-      role: 'owner',
-      full_name: nome,
-      phone: telefone,
-    }).eq('id', authData.user.id)
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .update({
+        barbershop_id: barbershop.id,
+        role: 'owner',
+        full_name: nome,
+        phone: telefone,
+      })
+      .eq('id', authData.user.id)
+
+    console.log('Profile update error:', profileError)
 
     navigate(`/sucesso?slug=${slug}`)
     setLoading(false)
