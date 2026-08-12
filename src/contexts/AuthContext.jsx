@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
       .from('profiles')
       .select('*')
       .eq('id', userId)
-      .single()
+      .maybeSingle()
 
     setProfile(prof)
 
@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
         .from('barbershops')
         .select('*')
         .eq('id', prof.barbershop_id)
-        .single()
+        .maybeSingle()
       setBarbershop(shop)
     }
 
